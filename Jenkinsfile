@@ -14,7 +14,7 @@ pipeline {
         stage('Build Application') {
             steps {
                 echo 'Building Spring Boot application...'
-                bat 'mvn clean install -DskipTests'
+                sh 'mvn clean install -DskipTests'
             }
         }
 
