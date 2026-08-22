@@ -2,14 +2,11 @@ pipeline {
 
     agent any
 
-    stages {
+    tools {
+        maven 'Maven'
+    }
 
-        stage('Checkout') {
-            steps {
-                echo 'Checking out source code...'
-                checkout scm
-            }
-        }
+    stages {
 
         stage('Build Application') {
             steps {
