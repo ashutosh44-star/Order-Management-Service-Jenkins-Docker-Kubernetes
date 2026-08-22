@@ -61,7 +61,7 @@ public class OrderController {
 
             @RequestParam(defaultValue = "desc") String sortDir
     ) {
-    	System.out.println("Order Management Service Version 2.1");
+    	 System.out.println("Order Management Service Version 2.1");
         Page<OrderResponse> response =
                 orderService.getAllOrders(
                         page,

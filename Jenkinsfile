@@ -3,7 +3,6 @@ pipeline {
 
     environment {
         DOCKER_IMAGE = "ashutoshchauhan149/order-management-service"
-        IMAGE_TAG = "latest"
     }
 
     stages {
@@ -19,9 +18,13 @@ pipeline {
 
         stage('Build Docker Image') {
             steps {
-                echo 'Building Docker image...'
+                echo "Building Docker image with tag: ${BUILD_NUMBER}"
 
-                sh 'docker build -t $DOCKER_IMAGE:$IMAGE_TAG .'
+                sh '''
+                    docker build \
+                    -t $DOCKER_IMAGE:$BUILD_NUMBER \
+                    -t $DOCKER_IMAGE:latest .
+                '''
             }
         }
 
@@ -41,7 +44,8 @@ pipeline {
                         -u "$DOCKER_USERNAME" \
                         --password-stdin
 
-                        docker push $DOCKER_IMAGE:$IMAGE_TAG
+                        docker push $DOCKER_IMAGE:$BUILD_NUMBER
+                        docker push $DOCKER_IMAGE:latest
 
                         docker logout
                     '''
