@@ -1,24 +1,25 @@
 pipeline {
-
     agent any
+
+    environment {
+        DOCKER_IMAGE = "ashutoshchauhan149/order-management-service"
+    }
 
     stages {
 
         stage('Build Application') {
             steps {
-                echo 'Building Spring Boot application using Maven Wrapper...'
-
-                sh 'chmod +x mvnw'
-                sh './mvnw clean install -DskipTests'
+                echo 'Building Spring Boot application...'
+                sh './mvnw clean package -DskipTests'
             }
         }
 
         stage('Build Docker Image') {
             steps {
                 echo 'Building Docker image...'
-
-                sh 'docker build -t ashutoshchauhan149/order-management-service:latest .'
+                sh 'docker build -t $DOCKER_IMAGE:latest .'
             }
         }
+
     }
 }
