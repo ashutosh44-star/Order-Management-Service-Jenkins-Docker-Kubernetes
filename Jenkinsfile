@@ -21,7 +21,7 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 echo 'Building Docker image...'
-                bat 'docker build -t ashutoshchauhan149/order-management-service:latest .'
+                sh 'docker build -t ashutoshchauhan149/order-management-service:latest .'
             }
         }
     }
